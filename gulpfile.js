@@ -61,23 +61,30 @@ gulp.task('babel', function () {
     .pipe(gulp.dest('dist'));
 });
 
+var printFunction = function(data){
+  console.log(data);
+};
+
 gulp.task('server', function (cb) {
-  exec('node lib/registrar.js', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-  exec('rabbitmq-server', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-  exec('mongod -dbpath /Users/Sriram/DevSpace/MongoDB/data/db', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-})
+
+  var registrar = exec('node lib/registrar.js');
+  registrar.stdout.on('data',printFunction);
+  registrar.stderr.on('data',printFunction);
+  registrar.on('close',printFunction);
+
+  var rabbit = exec('rabbitmq-server');
+
+  rabbit.stdout.on('data',printFunction);
+  rabbit.stderr.on('data',printFunction);
+  rabbit.on('close',printFunction);
+
+  //var mongo = exec('mongod -dbpath /Users/Sriram/DevSpace/MongoDB/data/db');
+
+  //mongo.stdout.on('data', printFunction('stdout',data));
+  //mongo.stderr.on('data', printFunction('stderr',data));
+  //mongo.on('close', printFunction('closing code',data));
+
+});
 
 gulp.task('prepublish', ['nsp', 'babel']);
 gulp.task('default', ['static', 'test']);

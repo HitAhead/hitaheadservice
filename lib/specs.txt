@@ -1,0 +1,40 @@
+node modules
+
+	registrar
+        Get the contract from user
+        {
+             userid
+            ,doctorName
+            ,slotID
+        }
+
+		check in an user into a queue
+		check out an user into a queue
+	tracker
+		track an user location in a queue
+    queueGenerator
+        create mqs as per the configuration
+
+				India Tamilnadu chennai karapakkam  1
+				india Tamilnadu chennai siruseri    2
+				india Tamilnadu chennai solinganallur 3
+
+				search for Vaasan
+
+				  -- List all the branches in the city
+				    How do you know which city the user lives in ? Lets get the users concern for using
+				    location.
+
+				User spots a branch comfortable for him
+
+				Search for doctors / department
+
+				Spots a department
+
+				  search for a doctor
+
+				search for slots
+
+				  book a slot/
+				  queue already open add him to it
+				  
